@@ -1,0 +1,631 @@
+/** 
+* SIZING
+**/
+/** 
+* COLORS
+**/
+/******************************
+*******************************
+*
+* THIS IS THE FILE TO UPDATE SITE-WIDE STYLE CHOICES FOR!!
+*   It can override the colors or sizes set by default.
+*   Below, we have provided the most likely variables to be
+*   overridden
+*
+  ~~  TO BEGIN USING YOUR OWN COLORS  ~~
+    1. Find the variable concept you are looking to override,
+      -or- add another from those found in 
+        '_default-constants.scss' in this folder.
+    2. Change the value and uncomment the line.
+    3. Repeat 1 & 2 for all cases needed.
+
+    4. Done? In most cases, this should be all that is needed to
+      get your version personalized. In more advanced cases, it 
+      may be necessary to update one of other .scss files directly.
+      If that happens, feel free to bring it up with us at Solo
+      and we'll try to take it into account in the future.
+*
+*******************************
+******************************/
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  cursor: pointer;
+}
+button.disabled {
+  cursor: default;
+  background: #8693a5;
+}
+
+.styledButton, .swagger-display-container div[id^=display-swagger] .swagger-ui .btn, .redocDisplayContainer .redoc-wrap .api-content .ilacoL {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  cursor: pointer;
+  border-radius: 2px;
+  height: 40px;
+  min-width: 90px;
+  line-height: 40px;
+  padding: 0 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.1s linear;
+  border: 1px solid #f0f5f7;
+  background-color: #158bc2;
+}
+.styledButton:hover, .swagger-display-container div[id^=display-swagger] .swagger-ui .btn:hover, .redocDisplayContainer .redoc-wrap .api-content .ilacoL:hover {
+  background-color: #23a9e7;
+}
+.styledButton:active, .swagger-display-container div[id^=display-swagger] .swagger-ui .btn:active, .redocDisplayContainer .redoc-wrap .api-content .ilacoL:active {
+  background-color: #51bbec;
+}
+.styledButton.paleButton, .swagger-display-container div[id^=display-swagger] .swagger-ui .paleButton.btn, .redocDisplayContainer .redoc-wrap .api-content .paleButton.ilacoL {
+  border-color: #158bc2;
+  background-color: white;
+  color: #158bc2;
+}
+.styledButton.paleButton:hover, .swagger-display-container div[id^=display-swagger] .swagger-ui .paleButton.btn:hover, .redocDisplayContainer .redoc-wrap .api-content .paleButton.ilacoL:hover {
+  border-color: #23a9e7;
+  background-color: #23a9e7;
+  color: white;
+}
+.styledButton.paleButton:active, .swagger-display-container div[id^=display-swagger] .swagger-ui .paleButton.btn:active, .redocDisplayContainer .redoc-wrap .api-content .paleButton.ilacoL:active {
+  border-color: #51bbec;
+  background-color: #51bbec;
+  color: white;
+}
+.styledButton.smallButton, .swagger-display-container div[id^=display-swagger] .swagger-ui .smallButton.btn, .redocDisplayContainer .redoc-wrap .api-content .smallButton.ilacoL {
+  height: 26px;
+  line-height: 26px;
+}
+.styledButton.justText, .swagger-display-container div[id^=display-swagger] .swagger-ui .justText.btn, .redocDisplayContainer .redoc-wrap .api-content .justText.ilacoL {
+  display: inline;
+  height: auto;
+  line-height: inherit;
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  padding: 0;
+  color: #158bc2;
+  font-weight: 500;
+}
+.styledButton.justText:hover, .swagger-display-container div[id^=display-swagger] .swagger-ui .justText.btn:hover, .redocDisplayContainer .redoc-wrap .api-content .justText.ilacoL:hover {
+  color: #23a9e7;
+}
+.styledButton.justText:active, .swagger-display-container div[id^=display-swagger] .swagger-ui .justText.btn:active, .redocDisplayContainer .redoc-wrap .api-content .justText.ilacoL:active {
+  color: #51bbec;
+}
+.styledButton.success, .swagger-display-container div[id^=display-swagger] .swagger-ui .success.btn, .redocDisplayContainer .redoc-wrap .api-content .success.ilacoL {
+  background-color: #0dce93;
+}
+.styledButton.success:hover, .swagger-display-container div[id^=display-swagger] .swagger-ui .success.btn:hover, .redocDisplayContainer .redoc-wrap .api-content .success.ilacoL:hover {
+  background-color: #1df1b0;
+}
+.styledButton.success:active, .swagger-display-container div[id^=display-swagger] .swagger-ui .success.btn:active, .redocDisplayContainer .redoc-wrap .api-content .success.ilacoL:active {
+  background-color: #4df4c1;
+}
+.styledButton.error, .swagger-display-container div[id^=display-swagger] .swagger-ui .error.btn, .redocDisplayContainer .redoc-wrap .api-content .error.ilacoL {
+  background-color: #d75b1d;
+}
+.styledButton.error:hover, .swagger-display-container div[id^=display-swagger] .swagger-ui .error.btn:hover, .redocDisplayContainer .redoc-wrap .api-content .error.ilacoL:hover {
+  background-color: #e57842;
+}
+.styledButton.error:active, .swagger-display-container div[id^=display-swagger] .swagger-ui .error.btn:active, .redocDisplayContainer .redoc-wrap .api-content .error.ilacoL:active {
+  background-color: #ec986e;
+}
+.styledButton.disabled, .swagger-display-container div[id^=display-swagger] .swagger-ui .disabled.btn, .redocDisplayContainer .redoc-wrap .api-content .disabled.ilacoL, .styledButton.disabled:hover, .styledButton.disabled:active {
+  cursor: not-allowed;
+  background-color: #8693a5;
+}
+
+.swaggerViewToggleHolder {
+  width: calc(100vw - 16px);
+  max-width: 1920px;
+  padding: 0px 30px 5px 0px;
+  margin: 0 auto;
+  display: block;
+  text-align: right;
+}
+.swaggerViewToggleHolder button {
+  color: #158bc2;
+}
+
+/*
+*   EXPLANATION OF TAGS, CLASSNAMES, AND VARIOUS ref HOOKS
+      Redocly generates the class names for its display. We have
+      tried to hook on to obvious, easy-to-read classes where possible
+      -while also trying to use as little page-structure 
+       info where possible- as these are the most likely to change
+       across versions.
+
+    Unfortunately, the 6-letter-combination classes seem to be
+      version dependent. -- FOR THIS REASON: If the Redoc version
+      is changed from what was in the repo on latest download, it may be
+      necessary to rediscover the hook names yourself.
+    We will be striving to find better, more 
+      consistent hooks to latch styling on to as we move forward.
+
+    Note, depending on how fine grain styling is desired, some of these
+      could be set with the Redoc theme option: 
+      https://github.com/Redocly/redoc/blob/main/src/theme.ts
+    This option was not as fine grain as we desired, but is an excellent
+      and less fragile alternative.
+*/
+.redocDisplayContainer {
+  border: 1px solid #dbe4ec;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.redocDisplayContainer .redoc-wrap {
+  /***
+  * LEFT AREA
+  ***/
+  /***
+  * SECOND (usually MIDDLE) THIRD
+  ***/
+}
+.redocDisplayContainer .redoc-wrap .menu-content {
+  background: #e9eef3;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] {
+  position: relative;
+  margin-top: 10px;
+  padding: 0px;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] input {
+  border-radius: 4px;
+  height: 34px;
+  line-height: 34px;
+  padding: 0 13px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: normal;
+  color: black;
+  background: white;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] input::placeholder {
+  color: #8693a5;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] i {
+  display: none;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] svg {
+  pointer-events: none;
+  left: auto;
+  right: 28px;
+  top: 23px;
+  margin-top: -15px;
+  width: 18px;
+  height: 18px;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] svg path {
+  fill: #8693a5;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] > div.scrollbar-container {
+  margin-top: 10px;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] > div.scrollbar-container,
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] div[data-role="search:results"] {
+  min-height: 45px;
+  padding: 0px;
+  margin: 0px;
+  background-color: #e9eef3;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] > div.scrollbar-container li,
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] div[data-role="search:results"] li {
+  background: white;
+  flex-basis: 100%;
+  border: 1px solid #e9eef3;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] > div.scrollbar-container li label,
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] div[data-role="search:results"] li label {
+  padding: 15px 10px;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] > div.scrollbar-container li:not(:last-of-type),
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] div[data-role="search:results"] li:not(:last-of-type) {
+  border-bottom: none;
+}
+.redocDisplayContainer .redoc-wrap .menu-content div[role=search] > div[data-role="search:results"] {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: -10px;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li {
+  border-top: 1px solid #dfe6ee;
+}
+.redocDisplayContainer .redoc-wrap .menu-content .scrollbar-container > ul > li {
+  border-top: 1px solid #d9e1ea;
+}
+.redocDisplayContainer .redoc-wrap .menu-content .scrollbar-container > ul > li:last-of-type {
+  border-bottom: 1px solid #d9e1ea;
+}
+.redocDisplayContainer .redoc-wrap .menu-content .scrollbar-container > ul > li ul {
+  background-color: #fafbfc;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label {
+  border-left: 4px solid transparent;
+  background-color: transparent;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label.active {
+  border-left: 4px solid #158bc2;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label:hover {
+  background-color: #d9e1ea;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label:active {
+  background-color: #c8d5e1;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type {
+  border-radius: 4px;
+  margin-top: 0;
+  width: 58px;
+  min-width: 58px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.delete {
+  background-color: #bf0a17;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.get {
+  background-color: #158bc2;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.hook {
+  background-color: #7e4bc6;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.post {
+  background-color: #0fac7c;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.put {
+  background-color: #d75b1d;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.options, .redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.patch, .redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.basic, .redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.link, .redocDisplayContainer .redoc-wrap .menu-content li > label .operation-type.head {
+  background-color: #325476;
+}
+.redocDisplayContainer .redoc-wrap .menu-content li > label > span:last-of-type {
+  font-size: 18px;
+  line-height: 22px;
+  color: #253e58;
+}
+.redocDisplayContainer .redoc-wrap .api-content {
+  background: white;
+  border-radius: 0 4px 4px 0;
+}
+.redocDisplayContainer .redoc-wrap .api-content .ilacoL {
+  height: 26px;
+  line-height: 26px;
+}
+.redocDisplayContainer .redoc-wrap .api-content span[type=primary] {
+  background-color: #7e4bc6;
+}
+.redocDisplayContainer .redoc-wrap .api-content span[type=warning] {
+  background-color: #d75b1d;
+  font-size: 14px;
+}
+.redocDisplayContainer .redoc-wrap .api-content table {
+  font-size: 16px;
+}
+.redocDisplayContainer .redoc-wrap .api-content table .eIjWpQ {
+  font-size: 16px;
+  color: #bf0a17;
+}
+.redocDisplayContainer .redoc-wrap .api-content table .ibAyvN {
+  font-size: 16px;
+  color: #c98709;
+  text-transform: lowercase;
+}
+.redocDisplayContainer .redoc-wrap .api-content table tr > td:last-of-type,
+.redocDisplayContainer .redoc-wrap .api-content table tr > td:last-of-type span {
+  line-height: 22px;
+}
+.redocDisplayContainer .redoc-wrap .api-content table button,
+.redocDisplayContainer .redoc-wrap .api-content table span {
+  font-size: 16px;
+}
+.redocDisplayContainer .redoc-wrap .api-content table span.iDFogX {
+  display: inline-block;
+  height: 21px;
+  line-height: 21px;
+  padding: 0 10px;
+  border-radius: 13px;
+  font-size: 12px;
+  color: #158bc2;
+  border-color: #158bc2;
+}
+.redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span {
+  border-radius: 4px;
+  padding: 0;
+  width: 58px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+.redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.delete {
+  background-color: #bf0a17;
+}
+.redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.get {
+  background-color: #158bc2;
+}
+.redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.hook {
+  background-color: #7e4bc6;
+}
+.redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.post {
+  background-color: #0fac7c;
+}
+.redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.put {
+  background-color: #d75b1d;
+}
+.redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.options, .redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.patch, .redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.basic, .redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.link, .redocDisplayContainer .redoc-wrap .api-content .faCWDf button > span.head {
+  background-color: #325476;
+}
+.redocDisplayContainer .redoc-wrap .api-content .loHuJX > ul > li {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+}
+.redocDisplayContainer .redoc-wrap .api-content .loHuJX > ul > li.react-tabs__tab--selected {
+  color: #158bc2;
+}
+.redocDisplayContainer .redoc-wrap .api-content .loHuJX > ul > li.tab-success {
+  color: #0fac7c;
+}
+.redocDisplayContainer .redoc-wrap .api-content .loHuJX > ul > li.tab-error {
+  color: #a23f3a;
+}
+.redocDisplayContainer .redoc-wrap .api-content .iDYSTN,
+.redocDisplayContainer .redoc-wrap .api-content .GIvIp {
+  border-radius: 4px;
+  line-height: 22px;
+}
+.redocDisplayContainer .redoc-wrap .api-content .iDYSTN {
+  background: #fff7f7;
+  border: 1px solid #bf0a17;
+  color: #bf0a17;
+}
+.redocDisplayContainer .redoc-wrap .api-content .GIvIp {
+  background: #ebfff9;
+  border: 1px solid #0fac7c;
+  color: #0fac7c;
+}
+.redocDisplayContainer .redoc-wrap .fburAk {
+  display: none;
+}
+.redocDisplayContainer button.sc-eGFuAX {
+  margin-top: 10px;
+  border-radius: 0px;
+}
+.redocDisplayContainer a,
+.redocDisplayContainer button:not(:disabled),
+.redocDisplayContainer [role=tablist] li {
+  outline-offset: 2px;
+}
+.redocDisplayContainer a:hover, .redocDisplayContainer a:focus-visible,
+.redocDisplayContainer button:not(:disabled):hover,
+.redocDisplayContainer button:not(:disabled):focus-visible,
+.redocDisplayContainer [role=tablist] li:hover,
+.redocDisplayContainer [role=tablist] li:focus-visible {
+  outline: 1px solid #158bc2;
+}
+.redocDisplayContainer a:active,
+.redocDisplayContainer button:not(:disabled):active,
+.redocDisplayContainer [role=tablist] li:active {
+  outline: 2px solid #158bc2;
+  box-shadow: 0 0 5px #158bc2;
+}
+
+/*
+*   EXPLANATION OF div[id^="display-swagger"]
+      First, WHAT IS IT?  Our SwaggerDisplay component relies on
+      this ID to both connect and update the component. This is the 
+      prefix we provide, where the suffix is based on the schema
+      being displayed.
+
+
+      Second, WHY? Swagger does not currently offer a way to modify 
+      their css. Importing their styling means competing 
+      specificity, and this makes it easier to do that.
+
+      Alternatives might include seemingly arbitrary swagger classes 
+      to bump specifity or throwing !important on to everything.
+*/
+.swagger-display-container {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.swagger-display-container div[id^=display-swagger] {
+  width: 100%;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .wrapper {
+  max-width: 1920px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .wrapper.information-container {
+  background: white;
+  padding: 10px 20px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .wrapper.information-container .info {
+  margin: 15px 0;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .btn {
+  height: 26px;
+  line-height: 26px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .btn span {
+  padding: 0;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .btn svg {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .btn svg * {
+  fill: white;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .parameter__name.required span,
+.swagger-display-container div[id^=display-swagger] .swagger-ui .parameter__name.required:after {
+  font-size: 14px;
+  color: #bf0a17 !important;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .parameter__name.required:after {
+  top: -3px;
+  padding: 0 0 0 2px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock {
+  background-color: white;
+  border-color: #325476;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock .opblock-summary {
+  border-color: #325476;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock .opblock-summary .opblock-summary-method {
+  border-radius: 4px;
+  margin-top: 0;
+  padding: 0;
+  width: 58px;
+  min-width: 58px;
+  height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #325476;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock .opblock-body .tab-header .tab-item.active h4 span:after {
+  background-color: #325476;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-delete .opblock-summary {
+  border-color: #bf0a17;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-delete .opblock-summary .opblock-summary-method {
+  background-color: #bf0a17;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-delete .opblock-body .tab-header .tab-item.active h4 span:after {
+  background-color: #bf0a17;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-get .opblock-summary {
+  border-color: #158bc2;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-get .opblock-summary .opblock-summary-method {
+  background-color: #158bc2;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-get .opblock-body .tab-header .tab-item.active h4 span:after {
+  background-color: #158bc2;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-hook .opblock-summary {
+  border-color: #7e4bc6;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-hook .opblock-summary .opblock-summary-method {
+  background-color: #7e4bc6;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-hook .opblock-body .tab-header .tab-item.active h4 span:after {
+  background-color: #7e4bc6;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-post .opblock-summary {
+  border-color: #0fac7c;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-post .opblock-summary .opblock-summary-method {
+  background-color: #0fac7c;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-post .opblock-body .tab-header .tab-item.active h4 span:after {
+  background-color: #0fac7c;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-put .opblock-summary {
+  border-color: #d75b1d;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-put .opblock-summary .opblock-summary-method {
+  background-color: #d75b1d;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-put .opblock-body .tab-header .tab-item.active h4 span:after {
+  background-color: #d75b1d;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-deprecated {
+  border-color: #e9eef3;
+  background-color: hsla(0, 0%, 92%, 0.1);
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-deprecated .opblock-summary {
+  border-color: black;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-deprecated .opblock-summary .opblock-summary-method {
+  background-color: black;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock.opblock-deprecated .opblock-body .tab-header .tab-item.active h4 span:after {
+  background-color: black;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock-summary {
+  padding: 0px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock-summary > button {
+  padding: 5px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui div.copy-to-clipboard,
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock-tag-section h3.opblock-tag,
+.swagger-display-container div[id^=display-swagger] .swagger-ui a,
+.swagger-display-container div[id^=display-swagger] .swagger-ui button:not(:disabled),
+.swagger-display-container div[id^=display-swagger] .swagger-ui select:not(:disabled) {
+  outline-offset: 2px;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui div.copy-to-clipboard:hover, .swagger-display-container div[id^=display-swagger] .swagger-ui div.copy-to-clipboard:focus, .swagger-display-container div[id^=display-swagger] .swagger-ui div.copy-to-clipboard:focus-visible,
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock-tag-section h3.opblock-tag:hover,
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock-tag-section h3.opblock-tag:focus,
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock-tag-section h3.opblock-tag:focus-visible,
+.swagger-display-container div[id^=display-swagger] .swagger-ui a:hover,
+.swagger-display-container div[id^=display-swagger] .swagger-ui a:focus,
+.swagger-display-container div[id^=display-swagger] .swagger-ui a:focus-visible,
+.swagger-display-container div[id^=display-swagger] .swagger-ui button:not(:disabled):hover,
+.swagger-display-container div[id^=display-swagger] .swagger-ui button:not(:disabled):focus,
+.swagger-display-container div[id^=display-swagger] .swagger-ui button:not(:disabled):focus-visible,
+.swagger-display-container div[id^=display-swagger] .swagger-ui select:not(:disabled):hover,
+.swagger-display-container div[id^=display-swagger] .swagger-ui select:not(:disabled):focus,
+.swagger-display-container div[id^=display-swagger] .swagger-ui select:not(:disabled):focus-visible {
+  outline: 1px solid #158bc2;
+}
+.swagger-display-container div[id^=display-swagger] .swagger-ui div.copy-to-clipboard:active,
+.swagger-display-container div[id^=display-swagger] .swagger-ui .opblock-tag-section h3.opblock-tag:active,
+.swagger-display-container div[id^=display-swagger] .swagger-ui a:active,
+.swagger-display-container div[id^=display-swagger] .swagger-ui button:not(:disabled):active,
+.swagger-display-container div[id^=display-swagger] .swagger-ui select:not(:disabled):active {
+  outline: 2px solid #158bc2;
+  box-shadow: 0 0 5px #158bc2;
+}
+.swagger-display-container div[id^=display-swagger] section.models {
+  position: relative;
+}
+.swagger-display-container div[id^=display-swagger] section.models .model-container > .model-box {
+  padding: 5px;
+}
+.swagger-display-container div[id^=display-swagger] section.models .model-box {
+  width: 100%;
+}
+.swagger-display-container div[id^=display-swagger] section.models .model-box > button > .model-toggle.collapsed {
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  margin-top: -10px;
+}
+.swagger-display-container div[id^=display-swagger] section.models .model-box button.model-box-control {
+  width: 100%;
+}
+.swagger-display-container div[id^=display-swagger] section.models .model-box .model-toggle {
+  float: right;
+  margin-top: -2px;
+}
+
+/******************************
+*******************************
+*
+* BASELINE RESET
+*
+*******************************
+******************************/
+
+/*# sourceMappingURL=main.css.map */

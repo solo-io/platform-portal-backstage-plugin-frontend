@@ -33,6 +33,10 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
+import {
+  GlooPortalHomePage,
+  GlooPortalApiDetailsPage,
+} from '@solo.io/platform-portal-backstage-plugin-frontend';
 
 const app = createApp({
   apis,
@@ -93,6 +97,13 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route path="/gloo-platform-portal" element={<GlooPortalHomePage />} />
+    <Route path="/gloo-platform-portal/apis" element={<GlooPortalHomePage />} />
+    <Route path="/gloo-platform-portal/usage-plans" element={<GlooPortalHomePage />} />
+    <Route
+      path="/gloo-platform-portal/apis/:apiId"
+      element={<GlooPortalApiDetailsPage />}
+    />
   </FlatRoutes>
 );
 

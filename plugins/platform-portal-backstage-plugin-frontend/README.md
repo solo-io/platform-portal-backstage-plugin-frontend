@@ -134,11 +134,11 @@ Then run the Backstage example app, replacing any environment variables as-neede
 ```sh
 docker run \
 --name backstage \
--e PORTAL_SERVER_URL=http://host.docker.internal:31080/v1  # replace \
+-e PORTAL_SERVER_URL=http://localhost:31080/v1  # replace \
 -e CLIENT_ID= # replace \
--e TOKEN_ENDPOINT=http://host.docker.internal:8088/realms/master/protocol/openid-connect/token # replace \
--e AUTH_ENDPOINT=http://host.docker.internal:8088/realms/master/protocol/openid-connect/auth # replace \
--e LOGOUT_ENDPOINT=http://host.docker.internal:8088/realms/master/protocol/openid-connect/logout # replace \
+-e TOKEN_ENDPOINT=.../realms/master/protocol/openid-connect/token # replace \
+-e AUTH_ENDPOINT=.../realms/master/protocol/openid-connect/auth # replace \
+-e LOGOUT_ENDPOINT=.../realms/master/protocol/openid-connect/logout # replace \
 -e POSTGRES_USER=postgres \
 -e POSTGRES_PASSWORD=password \
 -e POSTGRES_HOST=host.docker.internal \

@@ -129,7 +129,7 @@ docker run \
 -d postgres:bookworm &
 ```
 
-Then run the Backstage example app, replacing any environment variables as-needed. This example uses gcr.io/solo-public/docs/portal-backstage-frontend:v0.0.3, but feel free to update it to the latest [GitHub release](https://github.com/solo-io/platform-portal-backstage-plugin-frontend/releases). `host.docker.internal`.
+Then run the Backstage example app, replacing any environment variables as-needed. This example uses gcr.io/solo-public/docs/portal-backstage-frontend:latest, but you can check the GitHub release versions [here](https://github.com/solo-io/platform-portal-backstage-plugin-frontend/releases). `host.docker.internal`.
 
 ```sh
 docker run \
@@ -142,7 +142,7 @@ docker run \
 -e POSTGRES_USER=postgres \
 -e POSTGRES_PASSWORD=password \
 -e POSTGRES_HOST=host.docker.internal \
--it -p 7007:7007 gcr.io/solo-public/docs/portal-backstage-frontend:v0.0.3
+-it -p 7007:7007 gcr.io/solo-public/docs/portal-backstage-frontend:latest
 ```
 
 Here is the list of Docker environment variables that this package adds to the Backstage `app-config.yaml`.

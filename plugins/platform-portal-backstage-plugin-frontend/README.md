@@ -148,6 +148,14 @@ docker run \
 Here is the list of Docker environment variables that this package adds to the Backstage `app-config.yaml`.
 
 ```yaml
+backend:
+  database:
+    client: pg
+    connection:
+      host: ${POSTGRES_HOST}
+      port: ${POSTGRES_PORT}
+      user: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
 glooPlatformPortal:
   portalServerUrl: ${PORTAL_SERVER_URL}
   clientId: ${CLIENT_ID}

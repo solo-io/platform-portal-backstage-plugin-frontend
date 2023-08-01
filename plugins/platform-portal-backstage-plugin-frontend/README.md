@@ -116,7 +116,7 @@ Solo.io provides a demo Backstage image with the `@solo.io/platform-portal-backs
 To begin the demo, make sure that:
 
 - You can access the portal server and view the Gloo Platform APIs you have access to through a URL that Docker can access (like [http://localhost:31080/v1/apis](http://localhost:31080/v1/apis))
-- You have an authorization server (like Keycloak or Okta) running that Docker can access which the PKCE authorization flow is enabled on.
+- You have an authorization server (like Keycloak or Okta) running that Docker can access, which the PKCE authorization flow is enabled on.
 
 Then run a Postgres container for the Backstage catalog (this creates an example user for the demo):
 

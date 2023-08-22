@@ -14,6 +14,8 @@ The Gloo Platform Portal Backstage plugin provides an interface for teams to man
 
 ## Setup
 
+**For the full setup instructions, including the required Gloo Gateway Kubernetes resources, please check the [solo.io docs site](https://docs.solo.io/gloo-gateway/main/portal/dev-portal/frontend/portal-frontend/). The following steps assume that these resources are already applied.**
+
 1. Install the [Gloo Platform Portal Backstage plugin](https://www.npmjs.com/package/@solo.io/platform-portal-backstage-plugin-frontend) into your Backstage app:
 
 ```bash
@@ -129,7 +131,7 @@ docker run \
 -d postgres:bookworm &
 ```
 
-Then run the Backstage example app, replacing any environment variables as-needed. This example uses gcr.io/solo-public/docs/portal-backstage-frontend:latest, but you can check the GitHub release versions [here](https://github.com/solo-io/platform-portal-backstage-plugin-frontend/releases). `host.docker.internal`.
+Then run the Backstage example app, replacing any environment variables as-needed. This example uses gcr.io/solo-public/docs/portal-backstage-frontend:latest, but you can check the GitHub release versions [here](https://github.com/solo-io/platform-portal-backstage-plugin-frontend/releases).
 
 ```sh
 docker run \

@@ -42,6 +42,9 @@ jobs:
           git checkout -b $RELEASE_BRANCH || true
           git push origin $RELEASE_BRANCH || true
 
+      # This looks like it is not pushing to the v0.0.x branch, but it is updating the NPM package correctly.
+      # It would be nice to have the resources versioned too, like:
+      # sed -i "s|frontend\/blob\/HEAD\/|frontend\/blob\/$RELEASE_BRANCH\/|" ./plugins/platform-portal-backstage-plugin-frontend/README.md || true
       - name: Update version in package.json
         run: |
           RELEASE_BRANCH=$(echo $RELEASE_TAG | sed 's|\.[0-9]*$|\.x|g')

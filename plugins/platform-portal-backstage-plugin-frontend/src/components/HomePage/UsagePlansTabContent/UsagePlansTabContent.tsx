@@ -1,11 +1,24 @@
 import { InfoCard } from '@backstage/core-components';
 import { ComponentAccordion } from '@backstage/plugin-home';
 import { Card, CardContent, Grid } from '@material-ui/core';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { useListApis } from '../../../Apis/hooks';
+import { PortalAuthContext } from '../../../context/PortalAuthContext';
 import UsagePlanCardsList from './UsagePlanCardsList';
 
 const UsagePlansTabContent = () => {
+  //
+  // Redirect if not logged in
+  //
+  const { isLoggedIn } = useContext(PortalAuthContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/gloo-platform-portal');
+    }
+  }, [isLoggedIn]);
+
   //
   // Get the APIs
   //

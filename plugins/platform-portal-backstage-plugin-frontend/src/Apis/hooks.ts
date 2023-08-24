@@ -88,7 +88,7 @@ export function useGetCurrentUser() {
 }
 
 export function useListApis() {
-  const res = useSwrWithAuth<API[] | APIProduct[]>('/apis');
+  const res = useSwrWithAuth<API[] | APIProduct[] | null>('/apis');
   //
   // The server returns the APIs grouped by APIProduct,
   // so we can convert it back to a list here.

@@ -88,12 +88,12 @@ export function useGetCurrentUser() {
 }
 
 export function useListApis() {
-  const res = useSwrWithAuth<API[] | APIProduct[]>('/apis');
+  const res = useSwrWithAuth<API[] | APIProduct[] | null>('/apis');
   //
   // The server returns the APIs grouped by APIProduct,
   // so we can convert it back to a list here.
   //
-  let processedAPIs = res.data as API[];
+  let processedAPIs = (res.data ?? []) as API[];
   if (!!res.data?.length && 'apiVersions' in res.data[0]) {
     const apiProducts = res.data as APIProduct[];
     processedAPIs = apiProducts.reduce((accum, curProd) => {

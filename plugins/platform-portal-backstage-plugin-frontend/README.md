@@ -6,6 +6,8 @@ The Gloo Platform Portal Backstage plugin provides an interface for teams to man
 
 For a demo of Gloo Platform Portal, [check out this video](https://www.youtube.com/watch?v=YL1aqjZDqGQ&t=0).
 
+> &#x26a0;&#xfe0f; Projects that use an older version of Backstage (prior to `v1.27.0`) should use [@solo.io/platform-portal-backstage-plugin-frontend@0.0.8](https://www.npmjs.com/package/@solo.io/platform-portal-backstage-plugin-backend/v/0.0.8), since that uses an older version of React.
+
 ## Features
 
 - View OpenAPI docs for your Gloo Platform Portal APIs using Swagger UI and Redoc UI.
@@ -70,12 +72,12 @@ The following sections provide quick steps for testing this plugin.
      # Format this variable as: "<portal-server-url>/v1".
      # The default value is: "http://localhost:31080/v1".
      portalServerUrl: 'http://localhost:31080/v1'
-   
+
      # The OAuth identity provider's Client ID.
      # In Keycloak, open the $KEYCLOAK_URL UI, click Clients, and from the Settings tab, find the Client ID.
      # In Okta, open your $OKTA_URL and from the Applications section, find your app's Client ID.
      clientId: ''
-   
+
      #
      # In Okta or Keycloak, you can find the following endpoints
      # the well-known OpenID config path for your authorization server, such as:
@@ -84,13 +86,15 @@ The following sections provide quick steps for testing this plugin.
      #
      # The `token_endpoint` is where to get the OAuth token.
      tokenEndpoint: ''
-   
+
      # The `authorization_endpoint` is where to get the PKCE authorization code.
      authEndpoint: ''
-   
+
      # The `end_session_endpoint` is where to end the session.
      logoutEndpoint: ''
    ```
+
+> &#x26a0;&#xfe0f; For Keycloak users, make sure the OIDC type is set to "public access type" on your client's settings page. On newer Keycloak versions, this is done by unchecking the "Client authentication" checkbox. Older Keycloak versions have an "Access Type" dropdown that should be set to public access.
 
 ### Trying out Solo's demo Backstage image
 

@@ -134,6 +134,8 @@ Run Docker containers to demo the Backstage image locally.
    -it -p 7007:7007 gcr.io/solo-public/docs/portal-backstage-frontend:latest
    ```
 
+> &#x26a0;&#xfe0f; For an older version of Backstage (prior to `v1.27.0`), you can use `gcr.io/solo-public/docs/portal-backstage-frontend:legacy-backstage-backend`.
+
 3. Check that the Docker environment variables that you set in the previous command are added to the Backstage `app-config.yaml` file.
 
    ```yaml

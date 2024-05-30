@@ -120,21 +120,21 @@ Run Docker containers to demo the Backstage image locally.
 
 2. Run Solo's demo Backstage app, replacing any environment variables as needed. This example uses the `gcr.io/solo-public/docs/portal-backstage-frontend:latest` image. For other versions, check the [GitHub release versions](https://github.com/solo-io/platform-portal-backstage-plugin-frontend/releases).
 
-   ```sh
-   docker run \
-   --name backstage \
-   -e PORTAL_SERVER_URL=http://localhost:31080/v1  # replace \
-   -e CLIENT_ID= # replace \
-   -e TOKEN_ENDPOINT=.../realms/master/protocol/openid-connect/token # replace \
-   -e AUTH_ENDPOINT=.../realms/master/protocol/openid-connect/auth # replace \
-   -e LOGOUT_ENDPOINT=.../realms/master/protocol/openid-connect/logout # replace \
-   -e POSTGRES_USER=postgres \
-   -e POSTGRES_PASSWORD=password \
-   -e POSTGRES_HOST=host.docker.internal \
-   -it -p 7007:7007 gcr.io/solo-public/docs/portal-backstage-frontend:latest
-   ```
-
 > &#x26a0;&#xfe0f; For an older version of Backstage (prior to `v1.27.0`), you can use `gcr.io/solo-public/docs/portal-backstage-frontend:legacy-backstage-backend`.
+
+```sh
+docker run \
+--name backstage \
+-e PORTAL_SERVER_URL=http://localhost:31080/v1  # replace \
+-e CLIENT_ID= # replace \
+-e TOKEN_ENDPOINT=.../realms/master/protocol/openid-connect/token # replace \
+-e AUTH_ENDPOINT=.../realms/master/protocol/openid-connect/auth # replace \
+-e LOGOUT_ENDPOINT=.../realms/master/protocol/openid-connect/logout # replace \
+-e POSTGRES_USER=postgres \
+-e POSTGRES_PASSWORD=password \
+-e POSTGRES_HOST=host.docker.internal \
+-it -p 7007:7007 gcr.io/solo-public/docs/portal-backstage-frontend:latest
+```
 
 3. Check that the Docker environment variables that you set in the previous command are added to the Backstage `app-config.yaml` file.
 

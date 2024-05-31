@@ -6,7 +6,7 @@ The Gloo Platform Portal Backstage plugin provides an interface for teams to man
 
 For a demo of Gloo Platform Portal, [check out this video](https://www.youtube.com/watch?v=YL1aqjZDqGQ&t=0).
 
-> &#x26a0;&#xfe0f; Projects that use an older version of Backstage (prior to `v1.27.0`) should use [@solo.io/platform-portal-backstage-plugin-frontend@0.0.8](https://www.npmjs.com/package/@solo.io/platform-portal-backstage-plugin-backend/v/0.0.8), since that uses an older version of React.
+> &#x26a0;&#xfe0f; Projects that use an older version of Backstage (prior to `v1.27.0`) can use [@solo.io/platform-portal-backstage-plugin-frontend@0.0.8](https://www.npmjs.com/package/@solo.io/platform-portal-backstage-plugin-backend/v/0.0.8), since that uses an older version of React.
 
 ## Features
 
@@ -122,10 +122,12 @@ Run Docker containers to demo the Backstage image locally.
 
 > &#x26a0;&#xfe0f; For an older version of Backstage (prior to `v1.27.0`), you can use `gcr.io/solo-public/docs/portal-backstage-frontend:legacy-backstage-backend`.
 
+> &#x24D8; The `PORTAL_SERVER_URL` uses `"localhost"` since it is used in requests that originate from the browser. The `POSTGRES_HOST` uses `"docker.host.internal"` since it is used in requests that originate from the backend.
+
 ```sh
 docker run \
 --name backstage \
--e PORTAL_SERVER_URL=http://host.docker.internal:31080/v1  # replace \
+-e PORTAL_SERVER_URL=http://localhost:31080/v1  # replace \
 -e CLIENT_ID= # replace \
 -e TOKEN_ENDPOINT=.../realms/master/protocol/openid-connect/token # replace \
 -e AUTH_ENDPOINT=.../realms/master/protocol/openid-connect/auth # replace \

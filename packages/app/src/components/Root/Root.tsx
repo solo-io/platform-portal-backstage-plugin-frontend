@@ -1,3 +1,4 @@
+import { GlooIcon } from '@solo.io/platform-portal-backstage-plugin-frontend';
 import React, { PropsWithChildren } from 'react';
 import { makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
@@ -26,7 +27,6 @@ import {
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { GlooIcon } from '@solo.io/platform-portal-backstage-plugin-frontend';
 
 const useSidebarLogoStyles = makeStyles({
   root: {

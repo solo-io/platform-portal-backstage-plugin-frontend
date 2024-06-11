@@ -1,7 +1,7 @@
 import { Link, Table, TableColumn } from '@backstage/core-components';
 import Chip from '@material-ui/core/Chip';
 import React, { useMemo } from 'react';
-import { API } from '../../../Apis/api-types';
+import { API, ApiVersionExtended } from '../../../Apis/api-types';
 
 interface TableFields {
   apiId: string;
@@ -64,21 +64,38 @@ const columns: TableColumn<TableFields>[] = [
   },
 ];
 
-const ApisTable = ({ apis }: { apis: API[] }) => {
-  const tableData = useMemo(
+const ApisTable = ({ apis }: { apis: (API | ApiVersionExtended)[] }) => {
+  const tableData = useMemo<TableFields[]>(
     () =>
-      apis.map(
-        a =>
-          ({
-            id: a.apiId,
-            apiId: a.apiId,
-            apiProductDisplayName: a.apiProductDisplayName ?? '',
-            apiVersion: a.apiVersion ?? '',
-            title: a.title,
-            contact: a.contact,
-            customMetadata: a.customMetadata,
-          } as TableFields),
-      ),
+      apis
+        .map(a => {
+          let tableFieldsObject: TableFields & { id: string };
+          if ('apiProductDisplayName' in a) {
+            // If this is "gloo-mesh-gateway"
+            tableFieldsObject = {
+              id: a.apiId,
+              apiId: a.apiId,
+              apiProductDisplayName: a.apiProductDisplayName ?? '',
+              apiVersion: a.apiVersion ?? '',
+              title: a.title,
+              contact: a.contact,
+              customMetadata: a.customMetadata,
+            };
+          } else if ('id' in a) {
+            // If this is "gloo-gateway"
+            tableFieldsObject = {
+              id: a.id,
+              apiId: a.id,
+              apiProductDisplayName: a.apiProductName ?? '',
+              apiVersion: a.name ?? '',
+              title: a.title,
+              contact: a.apiProductContactEmail,
+              customMetadata: a.apiProductMetadata ?? undefined,
+            };
+          }
+          return tableFieldsObject!;
+        })
+        .filter(a => !!a),
     [apis],
   );
 

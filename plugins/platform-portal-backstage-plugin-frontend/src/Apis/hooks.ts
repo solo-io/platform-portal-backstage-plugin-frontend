@@ -8,6 +8,8 @@ import {
   APIKey,
   APIProduct,
   APISchema,
+  ApiProductSummary,
+  ApiVersionExtended,
   UsagePlan,
   User,
 } from './api-types';
@@ -88,12 +90,16 @@ export function useGetCurrentUser() {
 }
 
 export function useListApis() {
-  const res = useSwrWithAuth<API[] | APIProduct[] | null>('/apis');
+  // TODO: This may be /api-products if we're using GG.
+  const res = useSwrWithAuth<API[] | APIProduct[] | ApiProductSummary[] | null>(
+    '/apis',
+  );
   //
   // The server returns the APIs grouped by APIProduct,
   // so we can convert it back to a list here.
   //
-  let processedAPIs = (res.data ?? []) as API[];
+  let processedAPIs = (res.data ?? []) as (API | ApiVersionExtended)[];
+  // For "gloo-mesh-gateway"
   if (!!res.data?.length && 'apiVersions' in res.data[0]) {
     const apiProducts = res.data as APIProduct[];
     processedAPIs = apiProducts.reduce((accum, curProd) => {
@@ -117,6 +123,39 @@ export function useListApis() {
       );
       return accum;
     }, [] as API[]);
+  }
+  // For "gloo-gateway"
+  if (!!res.data?.length && 'id' in res.data[0]) {
+    // // Fetch the information for each version.
+    // const summaries = res.data as ApiProductSummary[];
+    // console.log('Parsed the ApiProductSummary text into JSON.');
+    // // Reset the processedAPIs so we can add each version to it.
+    // processedAPIs = [];
+    // // We have to do a separate request for each ApiProduct in order to get their versions.
+    // for (let i = 0; i < summaries.length; i++) {
+    //   const apiProductSummary = summaries[i];
+    //   const getVersionsUrl = `${this.portalServerUrl}/apis/${apiProductSummary.id}/versions`;
+    //   console.log(
+    //     `Fetching API versions from ${getVersionsUrl} (identified as ${this.portalServerType}).`,
+    //   );
+    //   const versionsRes = await fetch(getVersionsUrl, { headers });
+    //   const resText = await versionsRes.text();
+    //   console.log(
+    //     `Fetched ${getVersionsUrl} (identified as ${this.portalServerType}) and recieved the response text: ${resText}`,
+    //   );
+    //   const versions = JSON.parse(resText) as ApiVersion[];
+    //   console.log('Parsed the ApiVersion text into JSON.');
+    //   if (!!versions?.length) {
+    //     // Add each API product's version to the processedAPIs.
+    //     processedAPIs.push(
+    //       ...versions.map(v => ({
+    //         ...v,
+    //         apiProductDescription: apiProductSummary.description,
+    //       })),
+    //     );
+    //   }
+    // TODO: Update this so that the gloo gateway versions are fetched.
+    // console.log('This needs updating for gloo-gateway');
   }
   return { ...res, data: processedAPIs };
 }

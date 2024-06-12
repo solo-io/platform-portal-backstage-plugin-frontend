@@ -49,15 +49,19 @@ export const useSwrWithAuthListApis = () => {
     customLog(
       `Fetching APIs from ${apisEndpoint} (identified as ${portalServerType}).`,
     );
-    let res: ApisEndpointResponseType = await fetchJSON(
-      apisEndpoint,
-      fetchInit,
-    );
+    let res: ApisEndpointResponseType = null;
+    try {
+      res = await fetchJSON(apisEndpoint, fetchInit);
+    } catch {}
     if (
-      // If the GG+GMG endpoints aren't the same, and
+      // If we didn't just try the GG endpoint, and
+      apisEndpoint !== gg_apisEndpoint &&
+      // the GG+GMG endpoints aren't the same, and
       gg_apisEndpoint !== gmg_apisEndpoint &&
       // the GMG request failed, or
       (!res ||
+        // the GMG request didn't fail, it returned data, but it's not an array, or
+        !Array.isArray(res) ||
         // the GMG request didn't fail, it returned data, but
         (!!res.length &&
           // it didn't return either GG or GMG data,
@@ -66,7 +70,9 @@ export const useSwrWithAuthListApis = () => {
     ) {
       // try with the GG endpoint.
       apisEndpoint = gg_apisEndpoint;
-      res = await fetchJSON(apisEndpoint, fetchInit);
+      try {
+        res = await fetchJSON(apisEndpoint, fetchInit);
+      } catch {}
     }
 
     let processedAPIs: (API | ApiVersionExtended)[] = [];
@@ -80,6 +86,8 @@ export const useSwrWithAuthListApis = () => {
       } else {
         identifiedPortalServerType = 'gloo-mesh-gateway';
       }
+      updatePortalServerType(identifiedPortalServerType);
+
       //
       // Transform the data
       //
@@ -125,13 +133,15 @@ export const useSwrWithAuthListApis = () => {
           customLog(
             `Fetching API versions from ${getVersionsUrl} (identified as ${identifiedPortalServerType}).`,
           );
-          const versionsRes = await fetch(getVersionsUrl, fetchInit);
-          const resText = await versionsRes.text();
+          let versions: ApiVersion[] = [];
+          try {
+            versions = await (await fetch(getVersionsUrl, fetchInit)).json();
+          } catch {}
           customLog(
-            `Fetched ${getVersionsUrl} (identified as ${identifiedPortalServerType}) and recieved the response text: ${resText}`,
+            `Fetched ${getVersionsUrl} (identified as ${identifiedPortalServerType}) and recieved the response: ${JSON.stringify(
+              versions,
+            )}`,
           );
-          const versions = JSON.parse(resText) as ApiVersion[];
-          customLog('Parsed the ApiVersion text into JSON.');
           if (!!versions?.length) {
             // Add each API product's version to the processedAPIs.
             processedAPIs.push(
@@ -147,8 +157,8 @@ export const useSwrWithAuthListApis = () => {
           }
         }
       }
-      updatePortalServerType(identifiedPortalServerType);
     }
+
     return processedAPIs;
   });
 };

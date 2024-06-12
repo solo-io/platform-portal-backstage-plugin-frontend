@@ -41,7 +41,7 @@ export function parseJwt(token: string) {
 }
 
 export const customLog = (...args: Parameters<typeof console.log>) => {
-  if (!!(window as any).__LOGGING_ENABLED__) {
+  if (localStorage.getItem('gloo-platform-portal:logging-enabled') === 'true') {
     console.log(...args);
   }
 };

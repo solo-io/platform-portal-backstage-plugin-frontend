@@ -20,8 +20,8 @@ type ApisEndpointResponseType =
   | null;
 
 /**
- * Returns `useSwr` with `fetchJson`, but adds the auth tokens
- * from the `PortalAuthContext` in the headers.
+ * Performs custom fetching logic needed for the listApis call to
+ * support "gloo-gateway" and "gloo-mesh-gateway".
  */
 export const useSwrWithAuthListApis = () => {
   const serverUrl = useGetPortalServerUrl();

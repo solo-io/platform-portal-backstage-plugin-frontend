@@ -25,8 +25,9 @@ interface IPortalAppContext extends PortalAppProviderProps {
 export const PortalAppContext = createContext({} as IPortalAppContext);
 
 export const PortalAppContextProvider = (props: PortalAppProviderProps) => {
-  const [portalServerType, setPortalServerType] =
-    useState<PortalServerType>('unknown');
+  const [portalServerType, setPortalServerType] = useState<PortalServerType>(
+    (window as any)._gppp_portal_server_type ?? 'unknown',
+  );
 
   return (
     <PortalAppContext.Provider
@@ -34,6 +35,7 @@ export const PortalAppContextProvider = (props: PortalAppProviderProps) => {
         portalServerType,
         updatePortalServerType: t => {
           customLog('Updating portal server type: ', t);
+          (window as any)._gppp_portal_server_type = t;
           setPortalServerType(t);
         },
       }}

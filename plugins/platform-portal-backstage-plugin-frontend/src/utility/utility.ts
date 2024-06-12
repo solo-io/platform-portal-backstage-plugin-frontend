@@ -39,3 +39,9 @@ export function parseJwt(token: string) {
   );
   return JSON.parse(jsonPayload);
 }
+
+export const customLog = (...args: Parameters<typeof console.log>) => {
+  if (!!(window as any).__LOGGING_ENABLED__) {
+    console.log(...args);
+  }
+};

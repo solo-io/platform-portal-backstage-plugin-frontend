@@ -1,48 +1,22 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetApiDetails } from '../../../Apis/hooks';
-import { RedocDisplay } from './RedocDisplay';
-import { SwaggerDisplay } from './SwaggerDisplay';
+import React, { useContext } from 'react';
+import { PortalAppContext } from '../../../context/PortalAppContext';
+import { GG_ApiSchemaDisplay } from './GG_ApiSchemaDisplay';
+import { GMG_ApiSchemaDisplay } from './GMG_ApiSchemaDisplay';
 
-/**
- * MAIN COMPONENT
- **/
-export function ApiSchemaDisplay({ showSwagger }: { showSwagger: boolean }) {
-  const { apiId } = useParams();
-  const {
-    isLoading: isLoadingApiSchema,
-    data: apiSchema,
-    error: apiSchemaError,
-  } = useGetApiDetails(apiId);
+const ApiSchemaDisplay = ({ showSwagger }: { showSwagger: boolean }) => {
+  const { portalServerType } = useContext(PortalAppContext);
 
-  if (isLoadingApiSchema) {
-    return <>Retrieving schema for ${apiId}...`</>;
+  //
+  // Render correct ApiSchemaDisplay (GG or GMG)
+  //
+  if (portalServerType === 'gloo-gateway') {
+    return <GG_ApiSchemaDisplay showSwagger={showSwagger} />;
   }
-  if (!!apiSchemaError) {
-    return (
-      <>
-        {apiSchemaError.message ??
-          'There was an error fetching this API schema.'}
-      </>
-    );
+  if (portalServerType === 'gloo-mesh-gateway') {
+    return <GMG_ApiSchemaDisplay showSwagger={showSwagger} />;
   }
+  // if (portalServerType==='unknown') we are loading.
+  return null;
+};
 
-  return (
-    <main className="page-container-wrapper">
-      {!showSwagger ? (
-        //
-        // Redoc - Default
-        //
-        <RedocDisplay spec={apiSchema} />
-      ) : (
-        //
-        // Swagger - Alternative
-        //
-        <SwaggerDisplay
-          spec={apiSchema}
-          apiId={apiId ?? 'Unsupported schema display'}
-        />
-      )}
-    </main>
-  );
-}
+export default ApiSchemaDisplay;

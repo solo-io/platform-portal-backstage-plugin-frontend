@@ -1,83 +1,11 @@
 import { useContext } from 'react';
-import useSWR, { useSWRConfig } from 'swr';
+import { useSWRConfig } from 'swr';
 import useSWRMutation from 'swr/mutation';
 import { useGetPortalServerUrl } from '../configHooks';
 import { PortalAuthContext } from '../context/PortalAuthContext';
-import {
-  API,
-  APIKey,
-  APIProduct,
-  APISchema,
-  ApiProductSummary,
-  ApiVersionExtended,
-  UsagePlan,
-  User,
-} from './api-types';
-
-//
-// Rename RESTPOINT to change the base API URL.
-//
-
-async function fetchJSON(...args: Parameters<typeof fetch>) {
-  if (typeof args[0] !== 'string') return undefined;
-  const url = args[0];
-  const newArgs: typeof args = [
-    url,
-    {
-      ...args[1],
-      headers: {
-        'Content-Type': 'application/json',
-        ...args[1]?.headers,
-      },
-    },
-  ];
-  const res = await fetch(...newArgs);
-  const json = await res.json();
-  // If this is a 4xx response, throw an error.
-  if (Math.floor(res.status / 100) === 4) {
-    if (!!json.message) {
-      throw new Error(`Error code: ${res.status}. ${json.message}`);
-    } else {
-      throw new Error(
-        `A ${res.status} error occurred while fetching the data.`,
-      );
-    }
-  }
-  // Else just return the data.
-  return json;
-}
-
-/**
- * Returns `useSwr` with `fetchJson`, but adds the auth tokens
- * from the `PortalAuthContext` in the headers.
- */
-const useSwrWithAuth = <T>(
-  path: string,
-  config?: Parameters<typeof useSWR<T>>[2],
-) => {
-  const serverUrl = useGetPortalServerUrl();
-  const { latestAccessToken } = useContext(PortalAuthContext);
-
-  const authHeaders = {} as any;
-  if (!!latestAccessToken) {
-    authHeaders.Authorization = `Bearer ${latestAccessToken}`;
-  }
-  return useSWR<T>(
-    serverUrl + path,
-    (...args) => {
-      return fetchJSON(args[0], {
-        ...(args.length > 1 && !!args[1] ? args[1] : {}),
-        headers: {
-          ...(args.length > 1 && args[1].headers ? args[1].headers : {}),
-          ...authHeaders,
-        },
-      });
-    },
-    {
-      ...(config ?? {}),
-    },
-  );
-};
+import { APIKey, APISchema, UsagePlan, User } from './api-types';
+import { fetchJSON, useSwrWithAuth } from './helpers';
+import { useSwrWithAuthListApis } from './list-apis-helpers';
 
 //
 // Queries
@@ -90,74 +18,9 @@ export function useGetCurrentUser() {
 }
 
 export function useListApis() {
-  // TODO: This may be /api-products if we're using GG.
-  const res = useSwrWithAuth<API[] | APIProduct[] | ApiProductSummary[] | null>(
-    '/apis',
-  );
-  //
-  // The server returns the APIs grouped by APIProduct,
-  // so we can convert it back to a list here.
-  //
-  let processedAPIs = (res.data ?? []) as (API | ApiVersionExtended)[];
-  // For "gloo-mesh-gateway"
-  if (!!res.data?.length && 'apiVersions' in res.data[0]) {
-    const apiProducts = res.data as APIProduct[];
-    processedAPIs = apiProducts.reduce((accum, curProd) => {
-      accum.push(
-        ...curProd.apiVersions.reduce((accumVer, api) => {
-          accumVer.push({
-            apiId: api.apiId,
-            apiProductDisplayName: curProd.apiProductDisplayName,
-            apiProductId: curProd.apiProductId,
-            apiVersion: api.apiVersion,
-            contact: api.contact,
-            customMetadata: api.customMetadata,
-            description: api.description,
-            license: api.license,
-            termsOfService: api.termsOfService,
-            title: api.title,
-            usagePlans: api.usagePlans,
-          });
-          return accumVer;
-        }, [] as API[]),
-      );
-      return accum;
-    }, [] as API[]);
-  }
-  // For "gloo-gateway"
-  if (!!res.data?.length && 'id' in res.data[0]) {
-    // // Fetch the information for each version.
-    // const summaries = res.data as ApiProductSummary[];
-    // console.log('Parsed the ApiProductSummary text into JSON.');
-    // // Reset the processedAPIs so we can add each version to it.
-    // processedAPIs = [];
-    // // We have to do a separate request for each ApiProduct in order to get their versions.
-    // for (let i = 0; i < summaries.length; i++) {
-    //   const apiProductSummary = summaries[i];
-    //   const getVersionsUrl = `${this.portalServerUrl}/apis/${apiProductSummary.id}/versions`;
-    //   console.log(
-    //     `Fetching API versions from ${getVersionsUrl} (identified as ${this.portalServerType}).`,
-    //   );
-    //   const versionsRes = await fetch(getVersionsUrl, { headers });
-    //   const resText = await versionsRes.text();
-    //   console.log(
-    //     `Fetched ${getVersionsUrl} (identified as ${this.portalServerType}) and recieved the response text: ${resText}`,
-    //   );
-    //   const versions = JSON.parse(resText) as ApiVersion[];
-    //   console.log('Parsed the ApiVersion text into JSON.');
-    //   if (!!versions?.length) {
-    //     // Add each API product's version to the processedAPIs.
-    //     processedAPIs.push(
-    //       ...versions.map(v => ({
-    //         ...v,
-    //         apiProductDescription: apiProductSummary.description,
-    //       })),
-    //     );
-    //   }
-    // TODO: Update this so that the gloo gateway versions are fetched.
-    // console.log('This needs updating for gloo-gateway');
-  }
-  return { ...res, data: processedAPIs };
+  // Listing API's is more complicated since we support GMG and GG Portal Server APIs.
+  // This uses a custom SWR fetcher function which may do several fetch calls.
+  return useSwrWithAuthListApis();
 }
 export function useGetApiDetails(id?: string) {
   return useSwrWithAuth<APISchema>(`/apis/${id}/schema`);

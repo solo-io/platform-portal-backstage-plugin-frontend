@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { customLog } from '../utility/utility';
 
 if (!window.isSecureContext) {
   // eslint-disable-next-line no-console
@@ -23,16 +24,22 @@ interface IPortalAppContext extends PortalAppProviderProps {
 
 export const PortalAppContext = createContext({} as IPortalAppContext);
 
+const LS_KEY_PORTAL_SERVER_TYPE = 'gloo-platform-portal:portal-server-type';
+
 export const PortalAppContextProvider = (props: PortalAppProviderProps) => {
-  const [portalServerType, setPortalServerType] =
-    useState<PortalServerType>('unknown');
+  const [portalServerType, setPortalServerType] = useState<PortalServerType>(
+    (localStorage.getItem(
+      LS_KEY_PORTAL_SERVER_TYPE,
+    ) as PortalServerType | null) ?? 'unknown',
+  );
 
   return (
     <PortalAppContext.Provider
       value={{
         portalServerType,
         updatePortalServerType: t => {
-          console.log('Updating portal server type: ', t);
+          customLog('Updating portal server type: ', t);
+          localStorage.setItem(LS_KEY_PORTAL_SERVER_TYPE, t);
           setPortalServerType(t);
         },
       }}

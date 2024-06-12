@@ -96,8 +96,8 @@ export type ApiVersion = {
 export type ApiVersionExtended = ApiVersion & {
   apiProductDescription: string;
   apiProductName: string;
-  apiProductMetadata: Record<string, string> | null;
-  apiProductContactEmail: string;
+  // apiProductMetadata: Record<string, string> | null;
+  // apiProductContactEmail: string;
 };
 
 //

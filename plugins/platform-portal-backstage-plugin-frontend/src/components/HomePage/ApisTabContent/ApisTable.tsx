@@ -1,15 +1,16 @@
 import { Link, Table, TableColumn } from '@backstage/core-components';
 import Chip from '@material-ui/core/Chip';
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { API, ApiVersionExtended } from '../../../Apis/api-types';
+import { PortalAppContext } from '../../../context/PortalAppContext';
 
 interface TableFields {
   apiId: string;
   apiProductDisplayName: string;
   apiVersion: string;
   title: string;
-  contact: string;
-  customMetadata: Record<string, string> | undefined;
+  contact?: string;
+  customMetadata?: Record<string, string> | undefined;
 }
 
 const metadataCustomFilterAndSearch: TableColumn<TableFields>['customFilterAndSearch'] =
@@ -24,9 +25,11 @@ const metadataCustomFilterAndSearch: TableColumn<TableFields>['customFilterAndSe
     });
   };
 
-const renderApiTitleLink = (row: TableFields) => (
-  <Link to={`/gloo-platform-portal/apis/${row.apiId}`}>{row.title}</Link>
-);
+const renderApiTitleLink = (row: TableFields) => {
+  return (
+    <Link to={`/gloo-platform-portal/apis/${row.apiId}`}>{row.title}</Link>
+  );
+};
 
 const renderApiMetadata = (row: TableFields) => {
   const data = row.customMetadata;
@@ -46,31 +49,40 @@ const renderApiMetadata = (row: TableFields) => {
   );
 };
 
-const columns: TableColumn<TableFields>[] = [
-  {
-    title: 'Title',
-    field: 'title',
-    highlight: true,
-    render: renderApiTitleLink,
-  },
-  { title: 'API Product', field: 'apiProductDisplayName' },
-  { title: 'API Version', field: 'apiVersion' },
-  { title: 'Contact', field: 'contact' },
-  {
-    title: 'Meta Data',
-    field: 'customMetadata',
-    customFilterAndSearch: metadataCustomFilterAndSearch,
-    render: renderApiMetadata,
-  },
-];
-
 const ApisTable = ({ apis }: { apis: (API | ApiVersionExtended)[] }) => {
+  const { portalServerType } = useContext(PortalAppContext);
+
+  const columns = useMemo<TableColumn<TableFields>[]>(
+    () => [
+      {
+        title: 'Title',
+        field: 'title',
+        highlight: true,
+        render: renderApiTitleLink,
+      },
+      { title: 'API Product', field: 'apiProductDisplayName' },
+      { title: 'API Version', field: 'apiVersion' },
+      ...(portalServerType === 'gloo-mesh-gateway'
+        ? [
+            { title: 'Contact', field: 'contact' },
+            {
+              title: 'Meta Data',
+              field: 'customMetadata',
+              customFilterAndSearch: metadataCustomFilterAndSearch,
+              render: renderApiMetadata,
+            },
+          ]
+        : []),
+    ],
+    [portalServerType],
+  );
+
   const tableData = useMemo<TableFields[]>(
     () =>
       apis
         .map(a => {
           let tableFieldsObject: TableFields & { id: string };
-          if ('apiProductDisplayName' in a) {
+          if ('apiId' in a) {
             // If this is "gloo-mesh-gateway"
             tableFieldsObject = {
               id: a.apiId,
@@ -88,9 +100,7 @@ const ApisTable = ({ apis }: { apis: (API | ApiVersionExtended)[] }) => {
               apiId: a.id,
               apiProductDisplayName: a.apiProductName ?? '',
               apiVersion: a.name ?? '',
-              title: a.title,
-              contact: a.apiProductContactEmail,
-              customMetadata: a.apiProductMetadata ?? undefined,
+              title: a.id,
             };
           }
           return tableFieldsObject!;

@@ -13,6 +13,8 @@ export const HomePage = () => {
   return (
     <PortalAuthContextProvider>
       <PortalAppContextProvider>
+        <PortalServerTypeChecker />
+
         <Page themeId="tool">
           <Toaster
             toastOptions={{
@@ -25,7 +27,6 @@ export const HomePage = () => {
             <HeaderLabel label="Owner" value="solo.io" />
           </Header>
 
-          <PortalServerTypeChecker />
           <HomePageTabsAndContent />
         </Page>
       </PortalAppContextProvider>

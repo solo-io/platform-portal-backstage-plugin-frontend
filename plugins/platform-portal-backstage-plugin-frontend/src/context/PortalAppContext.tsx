@@ -24,14 +24,9 @@ interface IPortalAppContext extends PortalAppProviderProps {
 
 export const PortalAppContext = createContext({} as IPortalAppContext);
 
-const LS_KEY_PORTAL_SERVER_TYPE = 'gloo-platform-portal:portal-server-type';
-
 export const PortalAppContextProvider = (props: PortalAppProviderProps) => {
-  const [portalServerType, setPortalServerType] = useState<PortalServerType>(
-    (localStorage.getItem(
-      LS_KEY_PORTAL_SERVER_TYPE,
-    ) as PortalServerType | null) ?? 'unknown',
-  );
+  const [portalServerType, setPortalServerType] =
+    useState<PortalServerType>('unknown');
 
   return (
     <PortalAppContext.Provider
@@ -39,7 +34,6 @@ export const PortalAppContextProvider = (props: PortalAppProviderProps) => {
         portalServerType,
         updatePortalServerType: t => {
           customLog('Updating portal server type: ', t);
-          localStorage.setItem(LS_KEY_PORTAL_SERVER_TYPE, t);
           setPortalServerType(t);
         },
       }}

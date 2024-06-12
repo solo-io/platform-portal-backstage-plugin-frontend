@@ -1,6 +1,7 @@
 import { Content, HeaderTabs } from '@backstage/core-components';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { PortalAppContext } from '../../context/PortalAppContext';
 import { PortalAuthContext } from '../../context/PortalAuthContext';
 import ApisTabContent from './ApisTabContent/ApisTabContent';
 import OverviewTabContent from './OverviewTabContent/OverviewTabContent';
@@ -10,6 +11,7 @@ export const HomePageTabsAndContent = () => {
   const { isLoggedIn } = useContext(PortalAuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const { portalServerType } = useContext(PortalAppContext);
 
   //
   // Tabs
@@ -27,7 +29,7 @@ export const HomePageTabsAndContent = () => {
         component: <ApisTabContent />,
       },
     ];
-    if (isLoggedIn) {
+    if (isLoggedIn && portalServerType === 'gloo-mesh-gateway') {
       tabs.push({
         label: 'Usage Plans',
         pathname: '/gloo-platform-portal/usage-plans',
@@ -35,7 +37,7 @@ export const HomePageTabsAndContent = () => {
       });
     }
     return tabs;
-  }, [isLoggedIn]);
+  }, [isLoggedIn, portalServerType]);
 
   const getTabIndexFromPathname = (pathname: string) => {
     const idx = tabs.findIndex(t => pathname === t.pathname);

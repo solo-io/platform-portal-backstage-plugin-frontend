@@ -1,7 +1,9 @@
 import { Header, HeaderLabel, Page } from '@backstage/core-components';
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
+import { PortalAppContextProvider } from '../../context/PortalAppContext';
 import { PortalAuthContextProvider } from '../../context/PortalAuthContext';
+import PortalServerTypeChecker from '../../utility/PortalServerTypeChecker';
 import { HomePageTabsAndContent } from './HomePageTabsAndContent';
 
 export const HomePage = () => {
@@ -10,20 +12,24 @@ export const HomePage = () => {
   //
   return (
     <PortalAuthContextProvider>
-      <Page themeId="tool">
-        <Toaster
-          toastOptions={{
-            duration: 3000,
-            position: 'bottom-right',
-            style: { zIndex: 99999999 },
-          }}
-        />
-        <Header title="Gloo Platform Portal">
-          <HeaderLabel label="Owner" value="solo.io" />
-        </Header>
+      <PortalAppContextProvider>
+        <PortalServerTypeChecker />
 
-        <HomePageTabsAndContent />
-      </Page>
+        <Page themeId="tool">
+          <Toaster
+            toastOptions={{
+              duration: 3000,
+              position: 'bottom-right',
+              style: { zIndex: 99999999 },
+            }}
+          />
+          <Header title="Gloo Platform Portal">
+            <HeaderLabel label="Owner" value="solo.io" />
+          </Header>
+
+          <HomePageTabsAndContent />
+        </Page>
+      </PortalAppContextProvider>
     </PortalAuthContextProvider>
   );
 };

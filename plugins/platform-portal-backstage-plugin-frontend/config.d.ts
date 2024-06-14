@@ -6,6 +6,11 @@ export interface Config {
     portalServerUrl: string;
 
     /**
+     * @visibility frontend
+     */
+    swaggerConfigUrl: string;
+
+    /**
      * The oauth client id.
      * In keycloak, this is shown in the client settings
      * of your keycloak instances UI: <your-keycloak-url>/auth

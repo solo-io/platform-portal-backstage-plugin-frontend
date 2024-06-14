@@ -9,6 +9,15 @@ export const useGetPortalServerUrl = () => {
   return value ?? 'http://localhost:31080/v1';
 };
 
+export const useGetSwaggerConfigUrl = () => {
+  const config = useApi(configApiRef);
+  let value = config.getOptionalString('glooPlatformPortal.swaggerConfigUrl');
+  // Remove trailing slash if supplied.
+  if (!!value && value.at(-1) === '/')
+    value = value.substring(0, value.length - 1);
+  return value ?? '';
+};
+
 export const useGetClientId = () => {
   const config = useApi(configApiRef);
   const value = config.getOptionalString('glooPlatformPortal.clientId');

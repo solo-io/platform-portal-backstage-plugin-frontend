@@ -92,6 +92,15 @@ The following sections provide quick steps for testing this plugin.
 
      # The `end_session_endpoint` is where to end the session.
      logoutEndpoint: ''
+
+     # This is an optional URL for your Swagger configuration file.
+     # The URL can be an absolute or relative path, and can be a JSON or YAML file.
+     # If you would like to configure the Swagger UI using the [Swagger UI configuration options](https://swagger.io/docs/open-source-tools/swagger-ui/usage/configuration/), you can do this by:
+     #   1. setting this variable to `"/swagger-config.yaml"`,
+     #   2. editing the `/packages/app/public/swagger-config.yaml` file,
+     #   3. verifying your changes locally,
+     #   4. rebuilding the project.
+     swaggerConfigUrl: ''
    ```
 
 > &#x26a0;&#xfe0f; For Keycloak users, make sure the OIDC type is set to "public access type" on your client's settings page. On newer Keycloak versions, this is done by unchecking the "Client authentication" checkbox. Older Keycloak versions have an "Access Type" dropdown that should be set to public access.

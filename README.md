@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This repository has been archived! Please see https://github.com/solo-io/platform-portal-backstage-plugin-backend for our recommended Backstage Portal plugin.
+
 # Backstage With Gloo Platform Portal
 
 This is a [Backstage](https://backstage.io) App with the Gloo Platform Portal frontend plugin installed. This plugin is located in the `./plugins/platform-portal-backstage-plugin-frontend` folder. See the Readme in that folder for more information.
